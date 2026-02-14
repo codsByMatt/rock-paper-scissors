@@ -1,7 +1,7 @@
 <html>
 
   <head>
-    <title>Functions</title>
+    <title>objects</title>
   </head>
 
   <body>
@@ -10,39 +10,59 @@
     <button onclick="playGame('Rock')">Rock</button>
     <button onclick="playGame('Paper')">Paper</button>
     <button onclick="playGame('Scissors')">Scissors</button>
+    <button onclick="
+    score.wins = 0;
+    score.losses = 0;
+    score.ties = 0;
+    alert(`your scores reset successfully`)
+    ">Reset Score</button>
 
-    <script>
-      function playGame(playerMove) {
-        const computerMove = pickComputerMove();
-        let result = '';
+  <script>
+   const score = {
+    wins: 0 ,
+    losses: 0 ,
+    ties: 0
+    }
 
-        if (playerMove === computerMove) {
-        result = 'tie';
-        } else if (
-        (playerMove === 'Paper' && computerMove === 'Rock') ||
-        (playerMove === 'Scissors' && computerMove === 'Paper') ||
-        (playerMove === 'Rock' && computerMove === 'Scissors')
-        ) {
-        result = 'you win';
-        } else {
-        result = 'you lose';
-        }
+    function playGame(playerMove) {
+      const computerMove = pickComputerMove();
+      let result = '';
 
-        alert(`you picked ${playerMove}. computer picked ${computerMove}. ${result}`);
+      if (playerMove === computerMove) {
+      result = 'tie';
+      } else if (
+      (playerMove === 'Paper' && computerMove === 'Rock') ||
+      (playerMove === 'Scissors' && computerMove === 'Paper') ||
+      (playerMove === 'Rock' && computerMove === 'Scissors')
+      ) {
+      result = 'you win';
+      } else {
+      result = 'you lose';
       }
 
-      function pickComputerMove() {
-        const randomNumber = Math.random();
-
-        if (randomNumber < 1 / 3) {
-        return 'Rock';
-        } else if (randomNumber < 2 / 3) {
-        return 'Paper';
-        }else if (randomNumber < 1){
-        return 'Scissors';
-        }
+      if (result === 'you win') {
+      score.wins++;
+      } else if(result === 'you lose') {
+      score.losses++;
+      } else if (result === 'tie') {
+      score.ties++;
       }
+
+      alert(`you picked ${playerMove}. computer picked ${computerMove}. ${result}
+Wins: ${score.wins}, Losses: ${score.losses}, Ties: ${score.ties}`);
+    }
+
+    function pickComputerMove() {
+      const randomNumber = Math.random();
+
+      if (randomNumber < 1 / 3) {
+      return 'Rock';
+      } else if (randomNumber < 2 / 3) {
+      return 'Paper';
+      } else {
+      return 'Scissors';
+      }
+    }
     </script>
   </body>
 </html>
-
